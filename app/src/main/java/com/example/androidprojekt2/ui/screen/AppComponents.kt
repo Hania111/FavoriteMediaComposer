@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TopBar(){
+fun TopBar(title : String){
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -25,7 +25,7 @@ fun TopBar(){
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "My Favourite Media App",
+            text = title,
             style = androidx.compose.material3.MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center
         )
@@ -35,6 +35,6 @@ fun TopBar(){
 @Preview
 @Composable
 fun topBarPreview(){
-    TopBar()
+    TopBar("My Favourite Media")
 }
 
