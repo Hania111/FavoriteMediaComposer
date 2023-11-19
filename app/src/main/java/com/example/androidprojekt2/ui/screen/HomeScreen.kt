@@ -15,40 +15,36 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.androidprojekt2.MediaItem
 import com.example.androidprojekt2.R
+import com.example.androidprojekt2.ui.FavouriteMediaViewModel
+import com.example.androidprojekt2.ui.UserInputEvents
 
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(navController: NavHostController, favouriteMediaViewModel: FavouriteMediaViewModel) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Text(
-            text = "My Favorite Media",
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        )
-        MediaList(mediaList = createMediaList(), navController)
+        TopBar()
+        MediaList(mediaMap = createMediaMap(), navController, favouriteMediaViewModel)
     }
 }
 @Preview
 @Composable
 fun homeScreenPreview(){
-   HomeScreen(rememberNavController())
+   HomeScreen(rememberNavController(), FavouriteMediaViewModel())
 }
 
 @Composable
-fun MediaItemComposable(mediaItem: MediaItem, navController: NavHostController) {
+fun MediaItemComposable(mediaItem: MediaItem, mediaItemId: Int, navController: NavHostController,   favouriteMediaViewModel: FavouriteMediaViewModel) {
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(8.dp)
         .clickable {
+            favouriteMediaViewModel.onEvent(UserInputEvents.SelectedMediaItem(mediaItemId))
             navController.navigate(Routes.DESCRIPTION_SCREEN)
         }) {
         Row(
@@ -78,19 +74,22 @@ fun MediaItemComposable(mediaItem: MediaItem, navController: NavHostController) 
 }
 
 @Composable
-fun MediaList(mediaList: List<MediaItem>, navController: NavHostController) {
+fun MediaList(mediaMap: Map<Int,MediaItem>, navController: NavHostController,   favouriteMediaViewModel: FavouriteMediaViewModel) {
     LazyColumn {
-        items(mediaList) { mediaItem ->
-            MediaItemComposable(mediaItem = mediaItem, navController)
+        items(mediaMap.entries.toList()) { entry ->
+            MediaItemComposable(mediaItem = entry.value, mediaItemId = entry.key, navController, favouriteMediaViewModel)
         }
     }
 }
 
-fun createMediaList():List<MediaItem>{
-    return listOf(
-        MediaItem("Cage The elephant", R.drawable.cte, "description 1"),
-        MediaItem("Cage The elephant", R.drawable.cte, "descritpion 2"),
-        MediaItem("Cage The elephant", R.drawable.cte, "description 3")
+
+fun createMediaMap(): Map<Int, MediaItem> {
+    // Sample data with unique keys
+    return mapOf(
+        0 to MediaItem("Cage The Elephant - Album 1", R.drawable.cte, "description 1"),
+        1 to MediaItem("Cage The Elephant - Album 2", R.drawable.cte, "description 2"),
+        2 to MediaItem("Cage The Elephant - Album 3", R.drawable.cte, "description 3")
     )
 }
+
 

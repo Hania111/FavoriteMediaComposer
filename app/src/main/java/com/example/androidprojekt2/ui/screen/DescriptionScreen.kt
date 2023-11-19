@@ -9,16 +9,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.androidprojekt2.ui.FavouriteMediaViewModel
 
 @Composable
-fun DescriptionScreen(){
+fun DescriptionScreen(favouriteMediaViewModel: FavouriteMediaViewModel){
+    val selectedMediaItem = favouriteMediaViewModel.uiState.value.selectedMediaItem
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
     ){
         Text(
-            text = "Opis...",
+            text = selectedMediaItem.toString(),
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Start
         )
@@ -28,5 +30,5 @@ fun DescriptionScreen(){
 @Preview
 @Composable
 fun descriptionScreenPreview(){
-    DescriptionScreen()
+    DescriptionScreen(FavouriteMediaViewModel())
 }
