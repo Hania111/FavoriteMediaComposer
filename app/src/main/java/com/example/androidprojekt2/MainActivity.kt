@@ -26,7 +26,15 @@ import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
 import com.example.androidprojekt2.ui.theme.AndroidProjekt2Theme
+import androidx.navigation.compose.rememberNavController
+import com.example.androidprojekt2.ui.screen.Routes
+import androidx.navigation.compose.composable
+import com.example.androidprojekt2.ui.screen.DescriptionScreen
+import com.example.androidprojekt2.ui.screen.HomeScreen
+import com.example.androidprojekt2.ui.screen.MyFavouriteMediaNaviagationGraph
 
 
 class MainActivity : ComponentActivity() {
@@ -35,65 +43,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AndroidProjekt2Theme {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    // Add a Text Composable for the title
-                    Text(
-                        text = "My Favorite Media",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp)
-                    )
-                    MediaList(mediaList = createMediaList())
-
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun MediaItemComposable(mediaItem: MediaItem) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .padding(8.dp)) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Image(
-                painter = painterResource(id = mediaItem.imageName),
-                contentDescription = mediaItem.description,
-                modifier = Modifier
-                    .height(100.dp)
-                    .weight(1f)
-            )
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .weight(2f)
-                    .padding(start = 16.dp)
-            ) {
-                Text(text = mediaItem.title)
-                Text(text = mediaItem.description)
+                myFavouriteMedia()
             }
         }
     }
 
-}
 
-@Composable
-fun MediaList(mediaList: List<MediaItem>) {
-    LazyColumn {
-        items(mediaList) { mediaItem ->
-            MediaItemComposable(mediaItem = mediaItem)
-        }
+    @Composable
+    fun myFavouriteMedia(){
+        MyFavouriteMediaNaviagationGraph()
     }
+
 }
 
-fun createMediaList():List<MediaItem>{
-    return listOf(MediaItem("Cage The elephant", R.drawable.cte, "really great album"),
-        MediaItem("Cage The elephant", R.drawable.cte, "really great album"),
-        MediaItem("Cage The elephant", R.drawable.cte, "really great album"))
-}
