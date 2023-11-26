@@ -1,6 +1,8 @@
 package com.example.androidprojekt2.ui
 
+import android.app.Application
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.content.contentValuesOf
 import androidx.lifecycle.ViewModel
 import com.example.androidprojekt2.MediaItem
 import com.example.androidprojekt2.createMediaMap
@@ -13,6 +15,9 @@ class FavouriteMediaViewModel : ViewModel(){
     fun getMediaItemById(id: Int?): MediaItem? {
         return mediaMap[id]
     }
+
+    val mediaItems: Map<Int, MediaItem>
+        get() = mediaMap
 
     fun onEvent(event: UserInputEvents){
         when (event){

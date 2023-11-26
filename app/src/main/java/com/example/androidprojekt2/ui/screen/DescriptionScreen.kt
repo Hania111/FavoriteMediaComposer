@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,7 +46,7 @@ fun DescriptionScreen(favouriteMediaViewModel: FavouriteMediaViewModel){
 
     Column(modifier = Modifier.fillMaxWidth()) {
 
-        TopBar(selectedMediaItem?.title ?: "No media selected")
+        TopBar(selectedMediaItem?.title ?: stringResource(R.string.no_media_selected))
 
         selectedMediaItem?.let { RowPhotoDescription(mediaItem = selectedMediaItem)}
 
@@ -69,7 +70,7 @@ fun RowPhotoDescription(mediaItem : MediaItem){
     Row(modifier = Modifier.fillMaxWidth()) {
         Image(
             painter = painterResource(id = mediaItem.imageName) ,
-            contentDescription = "Description",
+            contentDescription = stringResource(R.string.description),
             modifier = Modifier
                 .size(150.dp)
                 .padding(12.dp)
@@ -88,10 +89,10 @@ fun RowPhotoDescription(mediaItem : MediaItem){
 fun MediaTabs(selectedTabIndex: Int, updateTabIndex: (Int) -> Unit) {
     TabRow(selectedTabIndex = selectedTabIndex) {
         Tab(selected = selectedTabIndex == 0, onClick = { updateTabIndex(0) }) {
-            Text("ALBUMS")
+            Text(stringResource(R.string.albums))
         }
         Tab(selected = selectedTabIndex == 1, onClick = { updateTabIndex(1) }) {
-            Text("Members")
+            Text(stringResource(R.string.members))
         }
     }
 }
@@ -106,7 +107,7 @@ fun AlbumsGrid(albumList: List<Int>) {
         items(albumList) { albumImageResId ->
             Image(
                 painter = painterResource(id = albumImageResId),
-                contentDescription = "Album Image",
+                contentDescription = stringResource(R.string.album_image),
                 modifier = Modifier
                     .padding(0.dp)
                     .aspectRatio(1f, true),
@@ -136,9 +137,9 @@ fun MembersList(lineUpList: List<String>) {
 
 
 
-@Preview
-@Composable
-fun descriptionScreenPreview(){
-    DescriptionScreen(FavouriteMediaViewModel())
-}
+//@Preview
+//@Composable
+//fun descriptionScreenPreview(){
+//    DescriptionScreen(FavouriteMediaViewModel())
+//}
 

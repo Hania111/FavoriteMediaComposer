@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My music</string>
+    <string name="my_favourite_music">My favourite music</string>
+    <string name="description">Description</string>
+    <string name="albums">ALBUMS</string>
+    <string name="members">MEMBERS</string>
+    <string name="album_image">Album Image</string>
+    <string name="no_media_selected">No media selected</string>
+    <string name="cage_the_elephant">Cage The Elephant</string>
 </resources>

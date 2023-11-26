@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,15 +32,11 @@ import com.example.androidprojekt2.ui.UserInputEvents
 @Composable
 fun HomeScreen(navController: NavHostController, favouriteMediaViewModel: FavouriteMediaViewModel) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        TopBar("My favourite music")
-        MediaList(mediaMap = createMediaMap(), navController, favouriteMediaViewModel)// pzerzucić tworzenie listy do ViewModel!!
+        TopBar(stringResource(R.string.my_favourite_music))
+        MediaList(navController, favouriteMediaViewModel)
     }
 }
-@Preview
-@Composable
-fun homeScreenPreview(){
-   HomeScreen(rememberNavController(), FavouriteMediaViewModel())
-}
+
 
 @Composable
 fun MediaItemComposable(mediaItem: MediaItem, mediaItemId: Int, navController: NavHostController,   favouriteMediaViewModel: FavouriteMediaViewModel) {
@@ -48,7 +45,7 @@ fun MediaItemComposable(mediaItem: MediaItem, mediaItemId: Int, navController: N
         .padding(8.dp)
         .clickable {
             favouriteMediaViewModel.onEvent(UserInputEvents.SelectedMediaItem(mediaItemId))
-            navController.navigate(Routes.DESCRIPTION_SCREEN) // idk czy to powinno byc w ViewModel
+            navController.navigate(Routes.DESCRIPTION_SCREEN)
         }) {
         Row(
             modifier = Modifier
@@ -81,13 +78,14 @@ fun MediaItemComposable(mediaItem: MediaItem, mediaItemId: Int, navController: N
 }
 
 @Composable
-fun MediaList(mediaMap: Map<Int,MediaItem>, navController: NavHostController,   favouriteMediaViewModel: FavouriteMediaViewModel) {
+fun MediaList(navController: NavHostController, favouriteMediaViewModel: FavouriteMediaViewModel) {
     LazyColumn {
-        items(mediaMap.entries.toList()) { entry ->
+        items(favouriteMediaViewModel.mediaItems.entries.toList()) { entry ->
             MediaItemComposable(mediaItem = entry.value, mediaItemId = entry.key, navController, favouriteMediaViewModel)
         }
     }
 }
+
 
 
 

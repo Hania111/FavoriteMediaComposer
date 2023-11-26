@@ -1,8 +1,11 @@
 package com.example.androidprojekt2
 
+import android.content.Context
+
 fun createMediaMap(): Map<Int, MediaItem> {
     return mapOf(
-        0 to MediaItem("Cage The Elephant", R.drawable.cte_band,
+        0 to MediaItem(
+            "Cage the elephant", R.drawable.cte_band,
             "American rock band established in 2006, is renowned for their dynamic mix of alternative, punk, " +
                     "and blues rock. They gained popularity with their hit \"Ain't No Rest for the Wicked\" ",
             createCageTheElephantAlbumList(), createCageTheElephantMembersList()
