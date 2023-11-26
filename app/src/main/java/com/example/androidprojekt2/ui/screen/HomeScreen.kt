@@ -13,8 +13,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -59,15 +61,19 @@ fun MediaItemComposable(mediaItem: MediaItem, mediaItemId: Int, navController: N
                 modifier = Modifier
                     .height(100.dp)
                     .weight(1f)
+                    .align(Alignment.CenterVertically)
             )
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(2f)
                     .padding(start = 16.dp)
+                    .align(Alignment.CenterVertically)
             ) {
-                Text(text = mediaItem.title)
-                Text(text = mediaItem.description)
+                Text(text = mediaItem.title,
+                    fontWeight = FontWeight.Bold
+                )
+
             }
         }
     }

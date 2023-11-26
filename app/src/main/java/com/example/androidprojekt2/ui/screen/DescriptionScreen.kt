@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,13 +49,15 @@ fun DescriptionScreen(favouriteMediaViewModel: FavouriteMediaViewModel){
 
         selectedMediaItem?.let { RowPhotoDescription(mediaItem = selectedMediaItem)}
 
+        Spacer(modifier = Modifier.height(16.dp))
+
         MediaTabs(selectedTabIndex = selectedTabIndex, updateTabIndex = { newTabIndex ->
             selectedTabIndex = newTabIndex
         })
 
         when (selectedTabIndex) {
             0 -> selectedMediaItem?.albumList?.let { albumList -> AlbumsGrid(albumList) }
-            1 -> selectedMediaItem?.lineUpList?.let { lineUpList -> LineUpList(lineUpList) }
+            1 -> selectedMediaItem?.lineUpList?.let { lineUpList -> MembersList(lineUpList) }
         }
     }
 
@@ -65,8 +71,8 @@ fun RowPhotoDescription(mediaItem : MediaItem){
             painter = painterResource(id = mediaItem.imageName) ,
             contentDescription = "Description",
             modifier = Modifier
-                .size(128.dp)
-                .padding(16.dp)
+                .size(150.dp)
+                .padding(12.dp)
         )
         Text(
             text = mediaItem.description,
@@ -85,7 +91,7 @@ fun MediaTabs(selectedTabIndex: Int, updateTabIndex: (Int) -> Unit) {
             Text("ALBUMS")
         }
         Tab(selected = selectedTabIndex == 1, onClick = { updateTabIndex(1) }) {
-            Text("LINE-UP")
+            Text("Members")
         }
     }
 }
@@ -102,8 +108,9 @@ fun AlbumsGrid(albumList: List<Int>) {
                 painter = painterResource(id = albumImageResId),
                 contentDescription = "Album Image",
                 modifier = Modifier
-                    .height(100.dp)
-                    .padding(1.dp)
+                    .padding(0.dp)
+                    .aspectRatio(1f, true),
+
             )
         }
     }
@@ -111,7 +118,7 @@ fun AlbumsGrid(albumList: List<Int>) {
 
 
 @Composable
-fun LineUpList(lineUpList: List<String>) {
+fun MembersList(lineUpList: List<String>) {
     LazyColumn(
         modifier = Modifier.fillMaxHeight()
     ) {
