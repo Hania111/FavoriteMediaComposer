@@ -1,6 +1,6 @@
 package com.example.androidprojekt2
 
-data class MediaItem(
+data class VideoItem(
     val title: String,
     val imageName: Int,
     val description: String,

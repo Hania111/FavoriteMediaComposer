@@ -1,10 +1,8 @@
 package com.example.androidprojekt2
 
-import android.content.Context
-
-fun createMediaMap(): Map<Int, MediaItem> {
+fun createMediaMap(): Map<Int, VideoItem> {
     return mapOf(
-        0 to MediaItem(
+        0 to VideoItem(
             "Cage the elephant", R.drawable.cte_band,
             "American rock band established in 2006, is renowned for their dynamic mix of alternative, punk, " +
                     "and blues rock. They gained popularity with their hit \"Ain't No Rest for the Wicked\" ",
@@ -12,11 +10,11 @@ fun createMediaMap(): Map<Int, MediaItem> {
         ),
 
 
-        1 to MediaItem("Arctic Monkeys", R.drawable.am, "British rock band formed in 2002 in Sheffield, England, known for their energetic and vibrant indie rock sound. They achieved fame with their debut album \"Whatever People Say I Am, That's What I'm Not," +
+        1 to VideoItem("Arctic Monkeys", R.drawable.am, "British rock band formed in 2002 in Sheffield, England, known for their energetic and vibrant indie rock sound. They achieved fame with their debut album \"Whatever People Say I Am, That's What I'm Not," +
                 "\" which became the fastest-selling debut album in UK history."
             , createArcticMonkeysAlbumList(), createArcticMonkeysMembersList()
         ),
-        2 to MediaItem("Coldplay", R.drawable.c, " British rock band formed in 1996, known for their melodic pop rock, emotive ballads, and expansive anthems. Their hit songs like \"Yellow\" and \"Fix You\" " +
+        2 to VideoItem("Coldplay", R.drawable.c, " British rock band formed in 1996, known for their melodic pop rock, emotive ballads, and expansive anthems. Their hit songs like \"Yellow\" and \"Fix You\" " +
                 "have garnered global acclaim, defining them as a mainstay in modern rock and pop music.",
             createColdplayAlbumList(), createColdplayMembersList())
     )
