@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.androidprojekt2.VideoItem
+import com.example.androidprojekt2.MyMediaItem
 import com.example.androidprojekt2.R
 import com.example.androidprojekt2.ui.FavouriteMediaViewModel
 import com.example.androidprojekt2.ui.UserInputEvents
@@ -36,7 +36,7 @@ fun HomeScreen(navController: NavHostController, favouriteMediaViewModel: Favour
 
 
 @Composable
-fun MediaItemComposable(videoItem: VideoItem, mediaItemId: Int, navController: NavHostController, favouriteMediaViewModel: FavouriteMediaViewModel) {
+fun MediaItemComposable(myMediaItem: MyMediaItem, mediaItemId: Int, navController: NavHostController, favouriteMediaViewModel: FavouriteMediaViewModel) {
     Card(modifier = Modifier
         .fillMaxWidth()
         .padding(8.dp)
@@ -50,8 +50,8 @@ fun MediaItemComposable(videoItem: VideoItem, mediaItemId: Int, navController: N
                 .padding(16.dp)
         ) {
             Image(
-                painter = painterResource(id = videoItem.imageName),
-                contentDescription = videoItem.description,
+                painter = painterResource(id = myMediaItem.imageName),
+                contentDescription = myMediaItem.description,
                 modifier = Modifier
                     .height(100.dp)
                     .weight(1f)
@@ -64,7 +64,7 @@ fun MediaItemComposable(videoItem: VideoItem, mediaItemId: Int, navController: N
                     .padding(start = 16.dp)
                     .align(Alignment.CenterVertically)
             ) {
-                Text(text = videoItem.title,
+                Text(text = myMediaItem.title,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -77,8 +77,8 @@ fun MediaItemComposable(videoItem: VideoItem, mediaItemId: Int, navController: N
 @Composable
 fun MediaList(navController: NavHostController, favouriteMediaViewModel: FavouriteMediaViewModel) {
     LazyColumn {
-        items(favouriteMediaViewModel.videoItems.entries.toList()) { entry ->
-            MediaItemComposable(videoItem = entry.value, mediaItemId = entry.key, navController, favouriteMediaViewModel)
+        items(favouriteMediaViewModel.myMediaItems.entries.toList()) { entry ->
+            MediaItemComposable(myMediaItem = entry.value, mediaItemId = entry.key, navController, favouriteMediaViewModel)
         }
     }
 }
