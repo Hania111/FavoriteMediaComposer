@@ -56,7 +56,9 @@ fun DescriptionScreen(favouriteMediaViewModel: FavouriteMediaViewModel){
     var selectedTabIndex by remember { mutableStateOf(0) }
 
 
-    Column(modifier = Modifier.fillMaxWidth()
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .verticalScroll(rememberScrollState())
        ) {
 
         TopBar(selectedMediaItem?.title ?: stringResource(R.string.no_media_selected))
@@ -119,7 +121,8 @@ fun MediaTabs(selectedTabIndex: Int, updateTabIndex: (Int) -> Unit) {
 fun AlbumsGrid(albumList: List<Int>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(count = 3),
-        modifier = Modifier.fillMaxHeight()
+        //modifier = Modifier.fillMaxHeight()
+        modifier = Modifier.height(370.dp)
     ) {
         items(albumList) { albumImageResId ->
             Image(
@@ -138,7 +141,8 @@ fun AlbumsGrid(albumList: List<Int>) {
 @Composable
 fun MembersList(lineUpList: List<String>) {
     LazyColumn(
-        modifier = Modifier.fillMaxHeight()
+        //modifier = Modifier.fillMaxHeight()
+        modifier = Modifier.height(370.dp)
     ) {
         items(lineUpList) { lineUpItem ->
             Text(
@@ -168,7 +172,9 @@ fun PlayVideo(videoUrls : List<String>) {
     AndroidView(factory = { context ->
         PlayerView(context).apply {
             player = exoPlayer
-            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            //layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            layoutParams = ViewGroup.LayoutParams(2500, 1000) // 300x300 pikseli
+
         }
     }, update = { view ->
         view.player = exoPlayer
