@@ -1,24 +1,26 @@
 package com.example.androidprojekt2
 
-import android.content.Context
-
-fun createMediaMap(): Map<Int, MediaItem> {
+fun createMediaMap(): Map<Int, MyMediaItem> {
     return mapOf(
-        0 to MediaItem(
+        0 to MyMediaItem(
             "Cage the elephant", R.drawable.cte_band,
             "American rock band established in 2006, is renowned for their dynamic mix of alternative, punk, " +
                     "and blues rock. They gained popularity with their hit \"Ain't No Rest for the Wicked\" ",
-            createCageTheElephantAlbumList(), createCageTheElephantMembersList()
+            createCageTheElephantAlbumList(), createCageTheElephantMembersList(),
+            listOf ("android.resource://com.example.androidprojekt2/raw/nr", "android.resource://com.example.androidprojekt2/raw/trouble", "android.resource://com.example.androidprojekt2/raw/cigarettedaydreams")
         ),
 
 
-        1 to MediaItem("Arctic Monkeys", R.drawable.am, "British rock band formed in 2002 in Sheffield, England, known for their energetic and vibrant indie rock sound. They achieved fame with their debut album \"Whatever People Say I Am, That's What I'm Not," +
+        1 to MyMediaItem("Arctic Monkeys", R.drawable.am, "British rock band formed in 2002 in Sheffield, England, known for their energetic and vibrant indie rock sound. They achieved fame with their debut album \"Whatever People Say I Am, That's What I'm Not," +
                 "\" which became the fastest-selling debut album in UK history."
-            , createArcticMonkeysAlbumList(), createArcticMonkeysMembersList()
+            , createArcticMonkeysAlbumList(), createArcticMonkeysMembersList(),
+            listOf ("android.resource://com.example.androidprojekt2/raw/soag", "android.resource://com.example.androidprojekt2/raw/amwdoucallmewhenuhigh")
         ),
-        2 to MediaItem("Coldplay", R.drawable.c, " British rock band formed in 1996, known for their melodic pop rock, emotive ballads, and expansive anthems. Their hit songs like \"Yellow\" and \"Fix You\" " +
+        2 to MyMediaItem("Coldplay", R.drawable.c, " British rock band formed in 1996, known for their melodic pop rock, emotive ballads, and expansive anthems. Their hit songs like \"Yellow\" and \"Fix You\" " +
                 "have garnered global acclaim, defining them as a mainstay in modern rock and pop music.",
-            createColdplayAlbumList(), createColdplayMembersList())
+            createColdplayAlbumList(), createColdplayMembersList(),
+            listOf ("android.resource://com.example.androidprojekt2/raw/biutyful", "android.resource://com.example.androidprojekt2/raw/skyfullofstars", "android.resource://com.example.androidprojekt2/raw/myuniverse")
+        )
     )
 }
 
